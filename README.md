@@ -1,6 +1,12 @@
 # CdkDroplistsSortedToBottom
-
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2.
+Trying to mimic playing card behavior from Solitaire/Patience game, with standard angular cdkDrag and cdkDrop components.
+
+3 cdkDropLists that are connected should only receive items if the dragged card was the last item in the droplist.
+They have sortPredicates to alwaus put items at the end of the list, the list itself is unsortable and every item in the list is dragDisabled except the last one.
+
+Unexpected behavior:
+-Dragging but not dropping from one container to another (reverting back to original container after draghovering over another) only works from left to right.
 
 ## Development server
 

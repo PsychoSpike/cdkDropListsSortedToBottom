@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-
+import { Title } from '@angular/platform-browser';
 import { CdkDrag,
   CdkDragDrop,
   CdkDragPlaceholder,
   CdkDropList,
-  moveItemInArray,
 transferArrayItem} from '@angular/cdk/drag-drop';
 import { NgIf } from '@angular/common';
 
@@ -17,9 +16,16 @@ import { NgIf } from '@angular/common';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'cdkDroplistsSortedToBottom';
+
+    ;
+
+  public constructor(private titleService: Title ) {
+    this.titleService.setTitle("DEV | cdkDropListsSortedToBottom");
+   }
+
+  title = 'DEV || cdkDroplistsSortedToBottom';
   movies1 = [
-    'List1 - item1 | The Force Awakens',
+    '<b>List1 - item1</b> | The Force Awakens',
     'List1 - item2 | The Last Jedi',
     'List1 - item3 | The Rise of Skywalker',
   ];
