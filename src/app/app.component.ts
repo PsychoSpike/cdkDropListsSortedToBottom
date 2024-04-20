@@ -6,22 +6,45 @@ import {
   CdkDragDrop,
   CdkDragPlaceholder,
   CdkDropList,
+  CdkDropListGroup,
   CdkDragStart,
-  CdkDragRelease,
   transferArrayItem,
+  CdkDragEnter, CdkDragMove,
+  CdkDragRelease
 } from '@angular/cdk/drag-drop';
 import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CdkDropList, CdkDrag, CdkDragPlaceholder, NgIf],
+  imports: [RouterOutlet, CdkDropList, CdkDrag, CdkDragPlaceholder, NgIf,CdkDropListGroup],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  cdkDragStarted(event: CdkDragStart<any>,i:number) {}
-  cdkDragReleased(event: CdkDragStart<any>,i:number) {}
+
+  isDragging = false; // Flag to track dragging state
+  hoverIndex: number | null = null; // Index where the dragged item hovers (optional)
+  draggedList?:number;
+  _currentIndex:number | null = null;
+  _currentField:number | null = null;
+  cdkDragStart(event: CdkDragStart<string>, i: number) {
+    console.log("DRAGSTART _dragRef: " + event.source._dragRef);
+    console.log("DRAGSTART Event source data: " + event.source.data);
+    console.log("DRAGSTART Index: " + i);
+    this.hoverIndex = i;
+  }
+  cdkDragReleased(event: CdkDragRelease<string>, i: number) {
+
+  }
+
+  onDragEnter(event: CdkDragEnter<string[], any>) {
+    console.log('Drag entered list:');
+    // You can add custom logic here, like highlighting the drop zone
+  }
+
+
+
 
   public constructor(private titleService: Title) {
     this.titleService.setTitle('DEV | cdkDropListsSortedToBottom');
@@ -69,11 +92,16 @@ export class AppComponent {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    transferArrayItem(
-      event.previousContainer.data,
-      event.container.data,
-      event.previousIndex,
-      event.currentIndex
-    );
+    if (event.previousContainer === event.container) {
+      // Card dropped back to its original list.
+      event.container.data.splice(event.previousIndex, 0);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
   }
 }

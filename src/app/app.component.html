@@ -4,43 +4,43 @@
   <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)" #movies1list="cdkDropList"
     [cdkDropListData]="movies1" [cdkDropListConnectedTo]="[movies1list,movies2list,movies3list]"
     cdkDropListSortingDisabled="true" [cdkDropListSortPredicate]="addToEndPredicate"
-    [cdkDropListEnterPredicate]="CardPlaceablePredicate">
+    [cdkDropListEnterPredicate]="CardPlaceablePredicate" >
     @for (movie of movies1; track movie; let i = $index) {
     <div *ngIf="movies1.length-1 == i; else elseBlock">
       <!-- this should be the last item -->
-      <div class="example-box last-item" cdkDrag (cdkDragStarted)="cdkDragStarted($event,i)"
-        (cdkDragReleased)="cdkDragReleased($event,i)">
+      <div class="example-box last-item" cdkDrag (cdkDragStarted)="cdkDragStart($event,i)"
+        (cdkDragReleased)="cdkDragReleased($event,i)" (cdkDragEnter)="onDragEnter" >
          {{movie}} (index {{i}})
         <div class="example-custom-placeholder" *cdkDragPlaceholder>placeholder</div>
       </div>
     </div>
     <!-- this should be a standard item, drag disabled item-->
     <ng-template #elseBlock>
-      <div class="example-box" cdkDrag [cdkDragDisabled]="true" (cdkDragStarted)="cdkDragStarted($event,i)"
+      <div class="example-box" cdkDrag [cdkDragDisabled]="true" (cdkDragStarted)="cdkDragStart($event,i)"
         (cdkDragReleased)="cdkDragReleased($event,i)">
          {{movie}} (index {{i}})
         <div class="example-custom-placeholder" *cdkDragPlaceholder>placeholder</div>
       </div>
     </ng-template>
-    }
+    }    
   </div>
 
   <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)" #movies2list="cdkDropList"
     [cdkDropListData]="movies2" [cdkDropListConnectedTo]="[movies1list,movies2list,movies3list]"
     cdkDropListSortingDisabled="true" [cdkDropListSortPredicate]="addToEndPredicate"
-    [cdkDropListEnterPredicate]="CardPlaceablePredicate">
+    [cdkDropListEnterPredicate]="CardPlaceablePredicate" >
     @for (movie of movies2; track movie; let i = $index) {
     <div *ngIf="movies2.length-1 == i; else elseBlock">
       <!-- this should be the last item -->
-      <div class="example-box last-item" cdkDrag (cdkDragStarted)="cdkDragStarted($event,i)"
-        (cdkDragReleased)="cdkDragReleased($event,i)">
+      <div class="example-box last-item" cdkDrag (cdkDragStarted)="cdkDragStart($event,i)"
+        (cdkDragReleased)="cdkDragReleased($event,i)"  (cdkDragEnter)="onDragEnter" >
         {{movie}} (index {{i}})
         <div class="example-custom-placeholder" *cdkDragPlaceholder>placeholder</div>
       </div>
     </div>
     <!-- this should be a standard item, drag disabled item-->
     <ng-template #elseBlock>
-      <div class="example-box" cdkDrag [cdkDragDisabled]="true" (cdkDragStarted)="cdkDragStarted($event,i)"
+      <div class="example-box" cdkDrag [cdkDragDisabled]="true" (cdkDragStarted)="cdkDragStart($event,i)"
         (cdkDragReleased)="cdkDragReleased($event,i)">
          {{movie}} (index {{i}})
         <div class="example-custom-placeholder" *cdkDragPlaceholder>placeholder</div>
@@ -53,25 +53,25 @@
   <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)" #movies3list="cdkDropList"
     [cdkDropListData]="movies3" [cdkDropListConnectedTo]="[movies1list,movies2list,movies3list]"
     cdkDropListSortingDisabled="true" [cdkDropListSortPredicate]="addToEndPredicate"
-    [cdkDropListEnterPredicate]="CardPlaceablePredicate">
+    [cdkDropListEnterPredicate]="CardPlaceablePredicate" > 
     @for (movie of movies3; track movie; let i = $index) {
     <div *ngIf="movies3.length-1 == i; else elseBlock">
       <!-- this should be the last item -->
-      <div class="example-box last-item" cdkDrag (cdkDragStarted)="cdkDragStarted($event,i)"
-        (cdkDragReleased)="cdkDragReleased($event,i)">
+      <div class="example-box last-item" cdkDrag (cdkDragStarted)="cdkDragStart($event,i)"
+        (cdkDragReleased)="cdkDragReleased($event,i)" (cdkDragEnter)="onDragEnter">
          {{movie}} (index {{i}})
         <div class="example-custom-placeholder" *cdkDragPlaceholder>placeholder</div>
       </div>
     </div>
     <!-- this should be a standard item, drag disabled item-->
     <ng-template #elseBlock>
-      <div class="example-box" cdkDrag [cdkDragDisabled]="true" (cdkDragStarted)="cdkDragStarted($event,i)"
+      <div class="example-box" cdkDrag [cdkDragDisabled]="true" (cdkDragStarted)="cdkDragStart($event,i)"
         (cdkDragReleased)="cdkDragReleased($event,i)">
          {{movie}} (index {{i}})
         <div class="example-custom-placeholder" *cdkDragPlaceholder>placeholder</div>
       </div>
     </ng-template>
-    }
+    } 
   </div>
 
 </div>
