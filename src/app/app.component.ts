@@ -1,62 +1,62 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { CdkDrag,
+import {
+  CdkDrag,
   CdkDragDrop,
   CdkDragPlaceholder,
   CdkDropList,
-transferArrayItem} from '@angular/cdk/drag-drop';
+  CdkDragStart,
+  CdkDragRelease,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,CdkDropList, CdkDrag, CdkDragPlaceholder,NgIf],
+  imports: [RouterOutlet, CdkDropList, CdkDrag, CdkDragPlaceholder, NgIf],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
+  cdkDragStarted(event: CdkDragStart<any>,i:number) {}
+  cdkDragReleased(event: CdkDragStart<any>,i:number) {}
 
-    ;
-
-  public constructor(private titleService: Title ) {
-    this.titleService.setTitle("DEV | cdkDropListsSortedToBottom");
-   }
+  public constructor(private titleService: Title) {
+    this.titleService.setTitle('DEV | cdkDropListsSortedToBottom');
+  }
 
   title = 'DEV || cdkDroplistsSortedToBottom';
   movies1 = [
-    '<b>List1 - item1</b> | The Force Awakens',
-    'List1 - item2 | The Last Jedi',
-    'List1 - item3 | The Rise of Skywalker',
+    'List1 - StartItem 1 ',
+    'List1 - StartItem 2',
+    'List1 - StartItem 3',
   ];
   movies2 = [
-    'List2 - item1 | The Phantom Menace',
-    'List2 - item2 | Attack of the Clones',
-    'List2 - item3 | Revenge of the Sith',
-    'List2 - item4 | The Wookie rebellion',
-
+    'List2 - StartItem 1 ',
+    'List2 - StartItem 2',
+    'List2 - StartItem 3',
   ];
   movies3 = [
-
-    'List3 - StartItem1 | A New Hope',
-    'List3 - StartItem2 | The Empire Strikes Back',
-    'List3 - StartItem3 | Return of the Jedi',
-    'List3 - StartItem4 | The Jedi left again'
+    'List3 - StartItem 1',
+    'List3 - StartItem 2',
+    'List3 - StartItem 3',
+    'List3 - StartItem 4',
   ];
 
-  movies4 = [
-
-    'List4 - StartItem1 | A New Hope',
-    'List4 - StartItem2 | The Empire Strikes Back',
-    'List4 - StartItem3 | Return of the Jedi',
-    'List4 - StartItem4 | The Jedi left again'
-  ];
-
-  CardPlaceablePredicate(){
+  CardPlaceablePredicate() {
     return true;
   }
 
-  addToEndPredicate(index: number, item: CdkDrag<number>,itemList: CdkDropList){
+  /**
+   * Predicate so only allows sorting into last index
+   */
+  addToEndPredicate(
+    index: number,
+    item: CdkDrag<number>,
+    itemList: CdkDropList
+  ) {
     return index === itemList.data.length;
   }
 
@@ -69,14 +69,11 @@ export class AppComponent {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-  
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-
+    transferArrayItem(
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
+    );
   }
 }
-

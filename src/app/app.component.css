@@ -46,7 +46,7 @@
   }
 
   .example-box.last-item:hover{
-    border:2px solid black;
+    border:2px solid blueviolet;
   }
   
   .cdk-drag-preview {
@@ -69,5 +69,9 @@
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
   }
   
+  .textwrapper{
+    padding:3rem;
+    padding-bottom:0px;
+  }
 
   
