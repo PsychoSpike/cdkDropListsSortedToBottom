@@ -1,3 +1,6 @@
+.textwrapper{
+  margin:3rem;
+}
 .gridwrapper{
     display:flex;
     flex-direction:row;

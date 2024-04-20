@@ -1,12 +1,16 @@
 
+<div class="textwrapper">On these lists, only the <b>last items</b> are draggable. Try to drag but not drop and return to original container.
+  Try this from left to right, and from right to left.
+  There is also a CSS:Hover black border around the last item of a list to showcase that the last item has been removed from original list.
+</div>
 <div class="gridwrapper">
-
 
   <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)" #movies1list="cdkDropList"
 [cdkDropListData]="movies1"
 [cdkDropListConnectedTo]="[movies1list,movies2list,movies3list,movies4list]" cdkDropListSortingDisabled="true" [cdkDropListSortPredicate]="addToEndPredicate" [cdkDropListEnterPredicate]="CardPlaceablePredicate">
     @for (movie of movies1; track movie; let  i = $index) {
       <div *ngIf="movies1.length-1 == i; else elseBlock">
+
       <!-- this should be the last item -->
       <div class="example-box last-item" cdkDrag >
         [ {{i}} ] | 
