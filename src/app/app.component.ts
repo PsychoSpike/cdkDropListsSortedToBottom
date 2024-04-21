@@ -22,25 +22,37 @@ import { NgIf } from '@angular/common';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-
-  isDragging = false; // Flag to track dragging state
-  hoverIndex: number | null = null; // Index where the dragged item hovers (optional)
-  draggedList?:number;
-  _currentIndex:number | null = null;
-  _currentField:number | null = null;
   cdkDragStart(event: CdkDragStart<string>, i: number) {
     console.log("DRAGSTART _dragRef: " + event.source._dragRef);
     console.log("DRAGSTART Event source data: " + event.source.data);
     console.log("DRAGSTART Index: " + i);
-    this.hoverIndex = i;
   }
   cdkDragReleased(event: CdkDragRelease<string>, i: number) {
-
+    console.log("DRAGRELEASE _dragRef: " + event.source._dragRef);
+    console.log("DRAGRELEASE Event source data: " + event.source.data);
+    console.log("DRAGSRELEASE Index: " + i);
   }
 
   onDragEnter(event: CdkDragEnter<string[], any>) {
     console.log('Drag entered list:');
     // You can add custom logic here, like highlighting the drop zone
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    /* the item can be put in at the correct index, but to showcase the error with the placeholder this was left out
+        if (event.previousContainer === event.container) {
+      // Card dropped back to its original list
+      event.container.data.splice(event.previousIndex, 0);
+    } else {
+    */
+
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+  
   }
 
 
@@ -91,17 +103,5 @@ export class AppComponent {
     return (index + 1) % 2 === item.data % 2;
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      // Card dropped back to its original list.
-      event.container.data.splice(event.previousIndex, 0);
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    }
-  }
+  
 }
